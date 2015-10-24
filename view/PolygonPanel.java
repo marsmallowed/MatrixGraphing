@@ -75,11 +75,12 @@ public class PolygonPanel extends JPanel {
 		add(btnAdd);
 		
 		vertexList = new JScrollPane();
+		sl_pointPanel.putConstraint(SpringLayout.NORTH, vertexList, 10, SpringLayout.NORTH, this);
+		sl_pointPanel.putConstraint(SpringLayout.WEST, vertexList, 38, SpringLayout.EAST, txtX);
+		sl_pointPanel.putConstraint(SpringLayout.SOUTH, vertexList, 275, SpringLayout.NORTH, this);
+		sl_pointPanel.putConstraint(SpringLayout.EAST, vertexList, -76, SpringLayout.EAST, this);
+		vertexList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		vertexList.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		sl_pointPanel.putConstraint(SpringLayout.NORTH, vertexList, 30, SpringLayout.NORTH, this);
-		sl_pointPanel.putConstraint(SpringLayout.WEST, vertexList, 50, SpringLayout.EAST, txtX);
-		sl_pointPanel.putConstraint(SpringLayout.SOUTH, vertexList, 264, SpringLayout.NORTH, this);
-		sl_pointPanel.putConstraint(SpringLayout.EAST, vertexList, -87, SpringLayout.EAST, this);
 		add(vertexList);
 		
 		listContents = new JPanel();
@@ -124,10 +125,16 @@ public class PolygonPanel extends JPanel {
 					vertices[givenVertices].setVisible(true);
 					givenVertices++;
 					
-					vertices[givenVertices].repaint();
-					vertices[givenVertices].revalidate();
+					vertexList.repaint();
+					vertexList.revalidate();
 				} else JOptionPane.showMessageDialog(new JFrame(), "You have already entered " + givenVertices + " vertices.");
 			}
 		});
 	}
+	
+	btnPlot.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	});
 }

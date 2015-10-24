@@ -80,9 +80,9 @@ public class Frame extends JFrame {
 		
 		polygonPopUp = new PolygonPopUp();
 		polygonPopUp.setVisible(false);
-//		polygonPanel = new PolygonPanel();
-//		getContentPane().add(polygonPanel, BorderLayout.CENTER);
-//		polygonPanel.setVisible(false);
+		polygonPanel = new PolygonPanel(0);
+		getContentPane().add(polygonPanel, BorderLayout.CENTER);
+		polygonPanel.setVisible(false);
 		
 		lineSegmentPanel = new LineSegmentPanel();
 		getContentPane().add(lineSegmentPanel, BorderLayout.CENTER);
@@ -118,6 +118,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(pointPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					blankPanel.setVisible(true);
 				}
@@ -128,6 +129,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(pointPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					ellipsePanel.setVisible(true);
 				}
@@ -138,6 +140,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(pointPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					hyperbolaPanel.setVisible(true);
 				}
@@ -148,6 +151,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(hyperbolaPanel);
 					getContentPane().remove(pointPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					parabolaPanel.setVisible(true);
 				}
@@ -158,28 +162,28 @@ public class Frame extends JFrame {
 					getContentPane().remove(hyperbolaPanel);
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					pointPanel.setVisible(true);
 				}
 				else if (selectedMode.equals("Polygon")) {
+					getContentPane().remove(polygonPanel);
 					Integer vertexNum = 0;
 					
 					do {
 						vertexNum = Integer.parseInt(JOptionPane.showInputDialog(polygonPopUp, "Enter number of vertices (at least 3):"));
-						
-						if (vertexNum > 2) {
-							polygonPanel = new PolygonPanel(vertexNum);
-							getContentPane().add(polygonPanel, BorderLayout.CENTER);
-							getContentPane().remove(blankPanel);
-							getContentPane().remove(ellipsePanel);
-							getContentPane().remove(hyperbolaPanel);
-							getContentPane().remove(parabolaPanel);
-							getContentPane().remove(pointPanel);
-							getContentPane().remove(vectorPanel);
-							getContentPane().remove(lineSegmentPanel);
-							polygonPanel.setVisible(true);
-						}
 					} while (vertexNum < 3);
+					
+					polygonPanel = new PolygonPanel(vertexNum);
+					getContentPane().add(polygonPanel, BorderLayout.CENTER);
+					getContentPane().remove(blankPanel);
+					getContentPane().remove(ellipsePanel);
+					getContentPane().remove(hyperbolaPanel);
+					getContentPane().remove(parabolaPanel);
+					getContentPane().remove(pointPanel);
+					getContentPane().remove(vectorPanel);
+					getContentPane().remove(lineSegmentPanel);
+					polygonPanel.setVisible(true);
 				}
 				else if(selectedMode.equals("Line Segment")) {
 					getContentPane().add(lineSegmentPanel, BorderLayout.CENTER);
@@ -189,6 +193,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(pointPanel);
 					getContentPane().remove(vectorPanel);
+					getContentPane().remove(polygonPanel);
 					lineSegmentPanel.setVisible(true);
 				}
 				else if(selectedMode.equals("Vector")) {
@@ -198,6 +203,7 @@ public class Frame extends JFrame {
 					getContentPane().remove(hyperbolaPanel);
 					getContentPane().remove(parabolaPanel);
 					getContentPane().remove(pointPanel);
+					getContentPane().remove(polygonPanel);
 					getContentPane().remove(lineSegmentPanel);
 					vectorPanel.setVisible(true);
 				}
