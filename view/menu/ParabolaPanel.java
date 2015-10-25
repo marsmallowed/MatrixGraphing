@@ -1,9 +1,13 @@
 package view.menu;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.*;
+
+import view.graphs.EllipseFrame;
 
 public class ParabolaPanel extends JPanel {
 	private JTextField txtX;
@@ -12,7 +16,7 @@ public class ParabolaPanel extends JPanel {
 	private JLabel lblX;
 	private JLabel lblY;
 	private JLabel lblMagnitude;
-	private JTextField txtHorizontal;
+	private JTextField txtMagnitude;
 	private JLabel lblOrientation;
 	private JComboBox orientationComboBox;
 	private JButton btnPlot;
@@ -54,14 +58,14 @@ public class ParabolaPanel extends JPanel {
 		s1_parabolaPanel.putConstraint(SpringLayout.WEST, lblMagnitude, 57, SpringLayout.WEST, this);
 		add(lblMagnitude);
 		
-		txtHorizontal = new JTextField();
-		s1_parabolaPanel.putConstraint(SpringLayout.WEST, txtY, 0, SpringLayout.WEST, txtHorizontal);
-		s1_parabolaPanel.putConstraint(SpringLayout.WEST, txtHorizontal, 175, SpringLayout.WEST, this);
-		s1_parabolaPanel.putConstraint(SpringLayout.NORTH, lblMagnitude, 0, SpringLayout.NORTH, txtHorizontal);
-		s1_parabolaPanel.putConstraint(SpringLayout.SOUTH, lblMagnitude, 0, SpringLayout.SOUTH, txtHorizontal);
-		s1_parabolaPanel.putConstraint(SpringLayout.EAST, lblMagnitude, -25, SpringLayout.WEST, txtHorizontal);
-		add(txtHorizontal);
-		txtHorizontal.setColumns(10);
+		txtMagnitude = new JTextField();
+		s1_parabolaPanel.putConstraint(SpringLayout.WEST, txtY, 0, SpringLayout.WEST, txtMagnitude);
+		s1_parabolaPanel.putConstraint(SpringLayout.WEST, txtMagnitude, 175, SpringLayout.WEST, this);
+		s1_parabolaPanel.putConstraint(SpringLayout.NORTH, lblMagnitude, 0, SpringLayout.NORTH, txtMagnitude);
+		s1_parabolaPanel.putConstraint(SpringLayout.SOUTH, lblMagnitude, 0, SpringLayout.SOUTH, txtMagnitude);
+		s1_parabolaPanel.putConstraint(SpringLayout.EAST, lblMagnitude, -25, SpringLayout.WEST, txtMagnitude);
+		add(txtMagnitude);
+		txtMagnitude.setColumns(10);
 		
 		lblOrientation = new JLabel("Orientation:");
 		s1_parabolaPanel.putConstraint(SpringLayout.WEST, lblOrientation, 57, SpringLayout.WEST, this);
@@ -74,7 +78,7 @@ public class ParabolaPanel extends JPanel {
 		s1_parabolaPanel.putConstraint(SpringLayout.WEST, orientationComboBox, 175, SpringLayout.WEST, this);
 		s1_parabolaPanel.putConstraint(SpringLayout.EAST, lblOrientation, -15, SpringLayout.WEST, orientationComboBox);
 		s1_parabolaPanel.putConstraint(SpringLayout.NORTH, orientationComboBox, 159, SpringLayout.NORTH, this);
-		s1_parabolaPanel.putConstraint(SpringLayout.SOUTH, txtHorizontal, -8, SpringLayout.NORTH, orientationComboBox);
+		s1_parabolaPanel.putConstraint(SpringLayout.SOUTH, txtMagnitude, -8, SpringLayout.NORTH, orientationComboBox);
 		s1_parabolaPanel.putConstraint(SpringLayout.NORTH, lblOrientation, 0, SpringLayout.NORTH, orientationComboBox);
 		s1_parabolaPanel.putConstraint(SpringLayout.SOUTH, lblOrientation, 0, SpringLayout.SOUTH, orientationComboBox);
 		add(orientationComboBox);
@@ -86,5 +90,20 @@ public class ParabolaPanel extends JPanel {
 		add(btnPlot);
 		
 		/** ACTION LISTENERS HERE */
+		btnPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double x_coord = null;
+				x_coord = Double.parseDouble(txtX.getText());
+				Double y_coord = null;
+				y_coord = Double.parseDouble(txtY.getText());
+				Double magni = null;
+				magni = Double.parseDouble(txtMagnitude.getText());
+				
+				if (x_coord != null && y_coord != null && magni != null ) {
+					EllipseFrame ellipseGraph = new EllipseFrame();
+					ellipseGraph.setVisible(true);
+				} else JOptionPane.showMessageDialog(new JFrame(), "Please enter a valid input.");
+			}
+		});
 	}	
 }

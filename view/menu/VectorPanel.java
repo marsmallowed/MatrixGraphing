@@ -4,6 +4,12 @@ import java.awt.Font;
 
 import javax.swing.*;
 
+import view.graphs.PointFrame;
+import view.graphs.VectorFrame;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class VectorPanel extends JPanel {
 	private JTextField txtX;
 	private JTextField txtY;
@@ -52,5 +58,18 @@ public class VectorPanel extends JPanel {
 		add(btnPlot);
 		
 		/** ACTION LISTENERS HERE */
+		btnPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double x_coord = null;
+				x_coord = Double.parseDouble(txtX.getText());
+				Double y_coord = null;
+				y_coord = Double.parseDouble(txtY.getText());
+				
+				if (x_coord != null && y_coord != null) {
+					VectorFrame vectorGraph = new VectorFrame(x_coord, y_coord);
+					vectorGraph.setVisible(true);
+				} else JOptionPane.showMessageDialog(new JFrame(), "Please enter a valid input.");
+			}
+		});
 	}
 }

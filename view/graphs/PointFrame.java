@@ -19,7 +19,7 @@ import view.graphs.modes.TranslatePanel;
 
 public class PointFrame extends JFrame {
 	
-	private JTextPane currentObjectPane;
+	private JTextArea currentObjectTextArea;
 	private JPanel choiceBlankPanel;
 	private JComboBox choicesComboBox;
 	private JPanel graphPanel;
@@ -28,7 +28,7 @@ public class PointFrame extends JFrame {
 	private Double transY;
 	
 	private JPanel translatePanel;
-	private JTextPane translatedObjectPane;
+	private JTextArea logTextArea;
 	
 	public PointFrame(double x, double y) {
 		setResizable(false);
@@ -38,30 +38,30 @@ public class PointFrame extends JFrame {
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
-		currentObjectPane = new JTextPane();
-		springLayout.putConstraint(SpringLayout.SOUTH, currentObjectPane, 110, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, currentObjectPane, 326, SpringLayout.WEST, getContentPane());
-		currentObjectPane.setEditable(false);
-		springLayout.putConstraint(SpringLayout.NORTH, currentObjectPane, 21, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, currentObjectPane, 27, SpringLayout.WEST, getContentPane());
-		getContentPane().add(currentObjectPane);
+		currentObjectTextArea = new JTextArea();
+		springLayout.putConstraint(SpringLayout.NORTH, currentObjectTextArea, 10, SpringLayout.NORTH, getContentPane());
+		currentObjectTextArea.setEditable(false);
+		springLayout.putConstraint(SpringLayout.WEST, currentObjectTextArea, 28, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, currentObjectTextArea, 327, SpringLayout.WEST, getContentPane());
+		getContentPane().add(currentObjectTextArea);
 		
-		currentObjectPane.setText("Current Object:\nP: [" + x + " " + y + "]");
+		currentObjectTextArea.setText("Current Object:\nP: [" + x + " " + y + "]");
+		
+		logTextArea = new JTextArea();
+		springLayout.putConstraint(SpringLayout.SOUTH, currentObjectTextArea, -6, SpringLayout.NORTH, logTextArea);
+		springLayout.putConstraint(SpringLayout.SOUTH, logTextArea, 200, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, logTextArea, 0, SpringLayout.EAST, currentObjectTextArea);
+		springLayout.putConstraint(SpringLayout.NORTH, logTextArea, 108, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, logTextArea, 28, SpringLayout.WEST, getContentPane());
+		logTextArea.setEditable(false);
+		getContentPane().add(logTextArea);
 		
 		Vector<String> choices = new Vector<String>();
 		choices.add("-Select-");
 		choices.add("Translate");
 		
-		translatedObjectPane = new JTextPane();
-		translatedObjectPane.setEditable(false);
-		springLayout.putConstraint(SpringLayout.NORTH, translatedObjectPane, 2, SpringLayout.SOUTH, currentObjectPane);
-		springLayout.putConstraint(SpringLayout.WEST, translatedObjectPane, 0, SpringLayout.WEST, currentObjectPane);
-		springLayout.putConstraint(SpringLayout.SOUTH, translatedObjectPane, 91, SpringLayout.SOUTH, currentObjectPane);
-		springLayout.putConstraint(SpringLayout.EAST, translatedObjectPane, 0, SpringLayout.EAST, currentObjectPane);
-		getContentPane().add(translatedObjectPane);
-		
 		choicesComboBox = new JComboBox(choices);
-		springLayout.putConstraint(SpringLayout.NORTH, choicesComboBox, 116, SpringLayout.SOUTH, currentObjectPane);
+		springLayout.putConstraint(SpringLayout.NORTH, choicesComboBox, 122, SpringLayout.SOUTH, currentObjectTextArea);
 		springLayout.putConstraint(SpringLayout.WEST, choicesComboBox, 74, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, choicesComboBox, 240, SpringLayout.WEST, getContentPane());
 		getContentPane().add(choicesComboBox);
@@ -85,7 +85,7 @@ public class PointFrame extends JFrame {
 		translatePanel.setVisible(false);
 		
 		graphPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.WEST, graphPanel, 24, SpringLayout.EAST, currentObjectPane);
+		springLayout.putConstraint(SpringLayout.WEST, graphPanel, 24, SpringLayout.EAST, currentObjectTextArea);
 		springLayout.putConstraint(SpringLayout.EAST, graphPanel, -26, SpringLayout.EAST, getContentPane());
 		graphPanel.setBackground(Color.WHITE);
 		springLayout.putConstraint(SpringLayout.NORTH, graphPanel, 43, SpringLayout.NORTH, getContentPane());
@@ -110,10 +110,6 @@ public class PointFrame extends JFrame {
 				revalidate();
 			}
 		});
-	}
-	
-	public JTextPane getLogTextPane() {
-		return translatedObjectPane;
 	}
 }
 

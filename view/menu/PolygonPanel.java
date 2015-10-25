@@ -7,11 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+import view.graphs.PolygonFrame;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PolygonPanel extends JPanel {
 	private JTextField txtX;
@@ -27,8 +30,8 @@ public class PolygonPanel extends JPanel {
 	private JPanel vertices[];
 	private JPanel coordinatesPanel;
 	private int givenVertices;
-	
-	private JButton btnDelete;
+	private ArrayList<Double> xCoordList;
+	private ArrayList<Double> yCoordList;
 	
 	public PolygonPanel(int vertexNum) {
 		SpringLayout sl_pointPanel = new SpringLayout();
@@ -108,12 +111,18 @@ public class PolygonPanel extends JPanel {
 		}
 		
 		givenVertices = 0;
+		xCoordList = new ArrayList<Double>();
+		yCoordList = new ArrayList<Double>();
+		
 		/** ACTION LISTENERS HERE */
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (givenVertices < vertices.length) {
 					vertices[givenVertices].setLayout(new BorderLayout(0, 0));
 					vertices[givenVertices].setSize(160, 30);
+					
+					xCoordList.add(Double.parseDouble(txtX.getText()));
+					yCoordList.add(Double.parseDouble(txtY.getText()));
 					
 					lblCoordinates = new JLabel();
 					lblCoordinates.setText("(" + txtX.getText() + "," + txtY.getText() + ")");
@@ -131,7 +140,12 @@ public class PolygonPanel extends JPanel {
 		
 		btnPlot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (givenVertices < vertices.length)
+					JOptionPane.showMessageDialog(new JFrame(), "Please enter " + vertices.length + " vertex coordinates.");
+				else {
+					PolygonFrame polygonGraph = new PolygonFrame(xCoordList, yCoordList);
+					polygonGraph.setVisible(true);
+				}
 			}
 		});
 	}

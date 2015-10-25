@@ -15,7 +15,7 @@ import view.graphs.modes.RotatePanel;
 import view.graphs.modes.ShearPanel;
 import view.graphs.modes.TranslatePanel;
 
-public class LineSegmentFrame extends JFrame {
+public class VectorFrame extends JFrame {
 	private JTextArea currentObjectTextArea;
 	private JPanel choiceBlankPanel;
 	private JComboBox choicesComboBox;
@@ -31,7 +31,7 @@ public class LineSegmentFrame extends JFrame {
 	private JPanel reflectPanel;
 	private JTextArea logTextArea;
 	
-	public LineSegmentFrame(double x1, double y1, double x2, double y2) {
+	public VectorFrame(double x, double y) {
 		setResizable(false);
 		setSize(880, 600);
 		setType(Type.UTILITY);
@@ -41,12 +41,13 @@ public class LineSegmentFrame extends JFrame {
 		
 		currentObjectTextArea = new JTextArea();
 		springLayout.putConstraint(SpringLayout.NORTH, currentObjectTextArea, 10, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, currentObjectTextArea, -465, SpringLayout.SOUTH, getContentPane());
 		currentObjectTextArea.setEditable(false);
 		springLayout.putConstraint(SpringLayout.WEST, currentObjectTextArea, 28, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, currentObjectTextArea, 327, SpringLayout.WEST, getContentPane());
 		getContentPane().add(currentObjectTextArea);
 		
-		currentObjectTextArea.setText("Current Object:\nP: [" + x1 + " " + y1 + "]\nQ: [" + x2 + " " + y2 + "]");
+		currentObjectTextArea.setText("Current Object:\nV: [" + x + " " + y + "]");
 		
 		Vector<String> choices = new Vector<String>();
 		choices.add("-Select-");
@@ -57,21 +58,20 @@ public class LineSegmentFrame extends JFrame {
 		choices.add("Reflect");
 		
 		logTextArea = new JTextArea();
-		springLayout.putConstraint(SpringLayout.SOUTH, currentObjectTextArea, -6, SpringLayout.NORTH, logTextArea);
-		springLayout.putConstraint(SpringLayout.NORTH, logTextArea, 108, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, logTextArea, 28, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, logTextArea, 6, SpringLayout.SOUTH, currentObjectTextArea);
+		springLayout.putConstraint(SpringLayout.WEST, logTextArea, 0, SpringLayout.WEST, currentObjectTextArea);
 		logTextArea.setEditable(false);
 		getContentPane().add(logTextArea);
 		
 		choicesComboBox = new JComboBox(choices);
-		springLayout.putConstraint(SpringLayout.SOUTH, logTextArea, -24, SpringLayout.NORTH, choicesComboBox);
-		springLayout.putConstraint(SpringLayout.NORTH, choicesComboBox, 224, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, logTextArea, -15, SpringLayout.NORTH, choicesComboBox);
+		springLayout.putConstraint(SpringLayout.NORTH, choicesComboBox, 223, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, choicesComboBox, 74, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, choicesComboBox, 240, SpringLayout.WEST, getContentPane());
 		getContentPane().add(choicesComboBox);
 		
 		choiceBlankPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.SOUTH, choicesComboBox, -97, SpringLayout.NORTH, choiceBlankPanel);
+		springLayout.putConstraint(SpringLayout.SOUTH, choicesComboBox, -22, SpringLayout.NORTH, choiceBlankPanel);
 		springLayout.putConstraint(SpringLayout.EAST, choiceBlankPanel, 326, SpringLayout.WEST, getContentPane());
 		choiceBlankPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		springLayout.putConstraint(SpringLayout.NORTH, choiceBlankPanel, 276, SpringLayout.NORTH, getContentPane());
@@ -125,9 +125,9 @@ public class LineSegmentFrame extends JFrame {
 		reflectPanel.setVisible(false);
 		
 		graphPanel = new JPanel();
+		springLayout.putConstraint(SpringLayout.EAST, logTextArea, -24, SpringLayout.WEST, graphPanel);
 		springLayout.putConstraint(SpringLayout.WEST, graphPanel, 24, SpringLayout.EAST, currentObjectTextArea);
 		springLayout.putConstraint(SpringLayout.EAST, graphPanel, -26, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, logTextArea, -24, SpringLayout.WEST, graphPanel);
 		graphPanel.setBackground(Color.WHITE);
 		springLayout.putConstraint(SpringLayout.NORTH, graphPanel, 43, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, graphPanel, 498, SpringLayout.NORTH, getContentPane());
@@ -192,5 +192,5 @@ public class LineSegmentFrame extends JFrame {
 			}
 		});
 	}
-}
 
+}
