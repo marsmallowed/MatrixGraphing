@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.awt.Font;
 import java.util.Vector;

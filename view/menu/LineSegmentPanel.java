@@ -1,8 +1,14 @@
-package view;
+package view.menu;
 
 import java.awt.Font;
 
 import javax.swing.*;
+
+import view.graphs.LineSegmentFrame;
+import view.graphs.PointFrame;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class LineSegmentPanel extends JPanel {
 	private JTextField txtX1;
 	private JTextField txtY1;
@@ -80,5 +86,26 @@ public class LineSegmentPanel extends JPanel {
 		txtY2.setColumns(10);
 		
 		/** ACTION LISTENERS HERE */
+		btnPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double x1 = null;
+				x1 = Double.parseDouble(txtX1.getText());
+				Double y1 = null;
+				y1 = Double.parseDouble(txtY1.getText());
+				Double x2 = null;
+				x2 = Double.parseDouble(txtX2.getText());
+				Double y2 = null;
+				y2 = Double.parseDouble(txtY2.getText());
+				
+				if (x1 != null && y1 != null && x2 != null && y2 != null) {
+					LineSegmentFrame lineSegmentGraph = new LineSegmentFrame(Double.parseDouble(txtX1.getText()), Double.parseDouble(txtY1.getText()),
+							  												 Double.parseDouble(txtX2.getText()), Double.parseDouble(txtY2.getText()));
+					lineSegmentGraph.setVisible(true);
+				} else JOptionPane.showMessageDialog(new JFrame(), "Please enter a valid input.");
+				
+				
+				
+			}
+		});
 	}
 }

@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -77,7 +77,7 @@ public class PolygonPanel extends JPanel {
 		vertexList = new JScrollPane();
 		sl_pointPanel.putConstraint(SpringLayout.NORTH, vertexList, 10, SpringLayout.NORTH, this);
 		sl_pointPanel.putConstraint(SpringLayout.WEST, vertexList, 38, SpringLayout.EAST, txtX);
-		sl_pointPanel.putConstraint(SpringLayout.SOUTH, vertexList, 275, SpringLayout.NORTH, this);
+		sl_pointPanel.putConstraint(SpringLayout.SOUTH, vertexList, 300, SpringLayout.NORTH, this);
 		sl_pointPanel.putConstraint(SpringLayout.EAST, vertexList, -76, SpringLayout.EAST, this);
 		vertexList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		vertexList.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -91,7 +91,8 @@ public class PolygonPanel extends JPanel {
 		listContents.add(numberPanel, BorderLayout.WEST);
 		numberPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		for (Integer i = 0; i < vertexNum; i++) {
-			JLabel vertexListIndex = new JLabel(i.toString());
+			Integer temp = i+1;
+			JLabel vertexListIndex = new JLabel(temp.toString());
 			numberPanel.add(vertexListIndex);
 		}
 		
@@ -119,9 +120,6 @@ public class PolygonPanel extends JPanel {
 					lblCoordinates.setHorizontalAlignment(SwingConstants.CENTER);
 					vertices[givenVertices].add(lblCoordinates, BorderLayout.CENTER);
 					
-					btnDelete = new JButton("x");
-					vertices[givenVertices].add(btnDelete, BorderLayout.EAST);
-					
 					vertices[givenVertices].setVisible(true);
 					givenVertices++;
 					
@@ -130,11 +128,11 @@ public class PolygonPanel extends JPanel {
 				} else JOptionPane.showMessageDialog(new JFrame(), "You have already entered " + givenVertices + " vertices.");
 			}
 		});
+		
+		btnPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
-	
-	btnPlot.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	});
 }

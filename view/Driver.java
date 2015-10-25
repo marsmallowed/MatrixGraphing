@@ -1,5 +1,7 @@
 package view;
 
+import view.menu.Frame;
+
 public class Driver {
 
 	public static void main(String[] args) {

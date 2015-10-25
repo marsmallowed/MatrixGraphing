@@ -1,4 +1,4 @@
-package view;
+package view.menu;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
